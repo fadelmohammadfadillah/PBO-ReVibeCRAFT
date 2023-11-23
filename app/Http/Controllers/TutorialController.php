@@ -50,7 +50,7 @@ class TutorialController extends Controller
         })
         ->addColumn('action', function ($tutorial) {
             // Tambahkan tombol aksi sesuai kebutuhan Anda
-            return '<a href="'.route('tutorial.editPage', 'id='.$tutorial->id).'" class="btn btn-info">Detail</a>';
+            return '<a href="'.route('tutorial.editPage', 'id='.$tutorial->id).'" class="btn btn-info">Detail</a><a class="hapusData btn btn-danger" data-id="'.$tutorial->id.'" data-url="'.route('tutorial.delete',$tutorial->id).'">Hapus</a>';
         })
         ->make(true);
     }
@@ -124,5 +124,19 @@ class TutorialController extends Controller
 
     public function deleteTutorial($id){
         //fungsi untuk delete
+        try{
+            $destroy = Tutorial::findOrFail($id);
+            $destroy->delete();
+
+            return response()->json([
+                'message'   => 'Tutorial deleted successfully',
+                'status'    => 200
+            ]);;
+        }catch(\Exception){
+            return response()->json([
+                'message'   => 'Not Found',
+                'status'    => 404
+            ]);
+        }
     }
 }

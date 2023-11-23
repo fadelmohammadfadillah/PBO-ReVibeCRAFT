@@ -32,7 +32,20 @@
 
 <!-- Main content -->
 <section class="content">
-
+    @if(session('status'))
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-check"></i> Data berhasil dihapus!</h4>
+        {{ session('status') }}
+    </div>
+    @endif
+    @if(session('error'))
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-check"></i> Data gagal dihapus!</h4>
+        {{ session('error') }}
+    </div>
+    @endif
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
@@ -102,5 +115,40 @@
             ]
         });
     });
+</script>
+<script>
+   $('#previewTutorial').on('click', '.hapusData', function () {
+    var id = $(this).data("id");
+    var url = $(this).data("url");
+    Swal
+        .fire({
+            title: 'Apa kamu yakin?',
+            text: "Kamu tidak akan dapat mengembalikan ini!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                // console.log();
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    data: {
+                        "id": id,
+                        "_token": "{{csrf_token()}}"
+                    },
+                    success: function (response) {
+                        // console.log();
+                        Swal.fire('Terhapus!', response.msg, 'success');
+                        $('#previewAkun').DataTable().ajax.reload();
+                    }
+                });
+            }
+        })
+});
 </script>
 @endsection

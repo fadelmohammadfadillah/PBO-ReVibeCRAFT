@@ -196,7 +196,7 @@
             url: '/dashboard/admin/tutorial/tutorialDetail/'+idTutorial,
             type: 'GET',
             success: function(response){
-                console.log(response.data);
+                console.log(`storage/assets/fotos/${response.data.foto}`);
                 $('#userId').val(response.data.user_id);
                 $('#inputJudul').val(response.data.judul_tutorial);
                 $('#inputDeskripsi').val(response.data.deskripsi);
