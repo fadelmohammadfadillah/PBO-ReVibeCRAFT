@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TutorialController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\FeedbackController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -55,19 +56,18 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::post('{id}/edit', 'editTutorial')->name('edit');
             Route::delete('{id}/delete', 'deleteTutorial')->name('delete');
         });
-
-    Route::controller(RatingController::class)
-        ->prefix('tutorial')
-        ->as('tutorial.')
+        Route::controller(FeedbackController::class)
+        ->prefix('feedback')
+        ->as('feedback.')
         ->group(function (){
-            Route::get('tutorial', 'index')->name('index');
-            Route::get('tutorial/editPage', 'editTutorialPage')->name('editPage');
-            Route::get('tutorialDetail/{id}', [RatingController::class, 'showDetail'])->name('tutorialDetail');
-            Route::get('tutorial/dataTutorial', [RatingController::class, 'getDataTutorial'])->name('dataTutorial');
-            Route::get('/viewTambah', 'addTutorialPage')->name('tambah');
-            Route::post('tambahTutorial', 'store')->name('store');
-            Route::post('{id}/edit', 'editTutorial')->name('edit');
-            Route::delete('{id}/delete', 'deleteTutorial')->name('delete');
+            Route::get('feedback', 'index')->name('index');
+            Route::get('feedback/editPage', 'editFeedbackPage')->name('editPage');
+            Route::get('feedbackDetail/{id}', [TutorialController::class, 'showDetail'])->name('feedbackDetail');
+            Route::get('feedback/dataFeedback', [TutorialController::class, 'getDataFeedback'])->name('dataFeedback');
+            Route::get('/viewTambah', 'addFeedbackPage')->name('tambah');
+            Route::post('tambahFeedback', 'store')->name('store');
+            Route::post('{id}/edit', 'editFeedback')->name('edit');
+            Route::delete('{id}/delete', 'deleteFeedback')->name('delete');
         });
 
         

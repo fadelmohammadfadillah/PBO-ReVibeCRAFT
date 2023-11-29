@@ -25,7 +25,7 @@ $links = [
     ],
     [
       "text" => "Kelola Tutorial",
-      "icon" => "fas fa-users",
+      "icon" => "fas fa-book",
       "is_multi" => true,
       "href" =>[
           [
@@ -37,6 +37,23 @@ $links = [
             "section_text" => "Tambah Tutorial",
             "section_icon" => "far fa-circle",
             "section_href" => route('tutorial.tambah')
+          ]
+      ]
+    ],
+    [
+      "text" => "Kelola FeedBack",
+      "icon" => "fas fa-comment",
+      "is_multi" => true,
+      "href" =>[
+          [
+            "section_text" => "Data FeedBack",
+            "section_icon" => "far fa-circle",
+            "section_href" => route('feedback.index')
+          ],
+          [
+            "section_text" => "Tambah FeedBack",
+            "section_icon" => "far fa-circle",
+            "section_href" => route('feedback.tambah')
           ]
       ]
     ]
