@@ -56,5 +56,19 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::delete('{id}/delete', 'deleteTutorial')->name('delete');
         });
 
+    Route::controller(RatingController::class)
+        ->prefix('tutorial')
+        ->as('tutorial.')
+        ->group(function (){
+            Route::get('tutorial', 'index')->name('index');
+            Route::get('tutorial/editPage', 'editTutorialPage')->name('editPage');
+            Route::get('tutorialDetail/{id}', [RatingController::class, 'showDetail'])->name('tutorialDetail');
+            Route::get('tutorial/dataTutorial', [RatingController::class, 'getDataTutorial'])->name('dataTutorial');
+            Route::get('/viewTambah', 'addTutorialPage')->name('tambah');
+            Route::post('tambahTutorial', 'store')->name('store');
+            Route::post('{id}/edit', 'editTutorial')->name('edit');
+            Route::delete('{id}/delete', 'deleteTutorial')->name('delete');
+        });
+
         
 });
