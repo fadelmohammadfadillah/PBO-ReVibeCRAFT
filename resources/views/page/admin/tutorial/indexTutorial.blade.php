@@ -77,6 +77,10 @@
             </div>
         </div>
         <div class="card-body p-0" style="margin: 20px">
+            <div>
+                {{-- <a href="{{ route('tutorial.generateTutorialDoc') }}" class="btn btn-info">Generate Document</a> --}}
+                <button class="btn btn-info" id="generateDoc">Generate Document</button>
+            </div>
             <table
                 id="previewTutorial"
                 class="table table-striped table-bordered display"
@@ -159,5 +163,21 @@
             }
         })
 });
+</script>
+<script>
+    $('#generateDoc').on('click', function () {
+        $.ajax({
+            url: '{!! route('tutorial.generateTutorialDoc') !!}',
+            type: 'GET',
+            data: {
+                "_token": "{{csrf_token()}}"
+            },
+            success: function (response) {
+                // console.log();
+                Swal.fire('Berhasil disimpan!', response.msg, 'success');
+                // $('#previewAkun').DataTable().ajax.reload();
+            }
+        });
+    });
 </script>
 @endsection

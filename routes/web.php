@@ -59,6 +59,7 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::post('tambahTutorial', 'store')->name('store');
             Route::post('{id}/edit', 'editTutorial')->name('edit');
             Route::delete('{id}/delete', 'deleteTutorial')->name('delete');
+            Route::get('generateTutorialDocument', [TutorialController::class, 'generateTutorialDocument'])->name('generateTutorialDoc');
         });
         Route::controller(FeedbackController::class)
         ->prefix('feedback')
@@ -88,16 +89,16 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
         });
 
     Route::controller(reportController::class)
-    ->prefix('report')
-    ->as('report.')
-    ->group(function (){
-        Route::get('report', 'index')->name('index');
-        Route::post('{id}/report', 'store')->name('report');
-        Route::get('/list', 'list')->name('list');
-        Route::get('tutorialReport/{id}', [reportController::class, 'showReport'])->name('tutoriaReport');
-        Route::get('/dataReportTutorial', [reportController::class, 'getDataReport'])->name('dataReportTutorial');
-        Route::delete('{id}/delete', 'deleteReport')->name('delete');
-    });
+        ->prefix('report')
+        ->as('report.')
+        ->group(function (){
+            Route::get('/report', 'index')->name('index');
+            Route::post('{id}/report', 'store')->name('report');
+            Route::get('/list', 'list')->name('list');
+            Route::get('tutorialReport/{id}', [reportController::class, 'showReport'])->name('tutoriaReport');
+            Route::get('/dataReportTutorial', [reportController::class, 'getDataReport'])->name('dataReportTutorial');
+            Route::delete('{id}/delete', 'deleteReport')->name('delete');
+        });
         
 });
 
