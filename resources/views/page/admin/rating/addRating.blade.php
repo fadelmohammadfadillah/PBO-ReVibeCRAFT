@@ -1,24 +1,25 @@
-@extends('layouts.base_admin.base_dashboard') @section('judul', 'Tambah Tutorial')
+@extends('layouts.base_admin.base_dashboard') @section('judul', 'Tambah FeedBack')
 @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Tambah Tutorial</h1>
+                <h1>Tambah Rating</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item">
                         <a href="{{ route('home') }}">Beranda</a>
                     </li>
-                    <li class="breadcrumb-item active">Tambah Tutorial</li>
+                    <li class="breadcrumb-item active">Tambah Rating</li>
                 </ol>
             </div>
         </div>
     </div>
     <!-- /.container-fluid -->
 </section>
+
 
 <!-- Main content -->
 <section class="content">
@@ -29,13 +30,13 @@
         {{ session('status') }}
       </div>
     @endif
-    <form method="post" action="{{route('tutorial.store')}}" enctype="multipart/form-data">
+    <form method="post" action="{{route('rating.store')}}" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Informasi Tutorial</h3>
+                        <h3 class="card-title">Informasi Rating</h3>
                         <div class="card-tools">
                             <button
                                 type="button"
@@ -48,26 +49,54 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="inputName">Judul</label>
+                            <label for="inputRatingId">Tutorial Id </label>
                             <input
                                 type="text"
-                                id="inputJudul"
-                                name="judul_tutorial"
+                                id="inputratingid"
+                                name="rating_id"
                                 class="form-control @error('name') is-invalid @enderror"
-                                placeholder="Masukkan Judul"
-                                value="{{ old('judul_tutorial') }}"
+                                placeholder="Masukkan Rating Id"
+                                value="{{ old('rating_id') }}"
                                 required="required"
-                                autocomplete="name">
-                            @error('judul')
+                                autocomplete="rating_id">
+                            @error('nama')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
+
                         <div class="form-group">
-                            <label for="inputDeskripsi">Deskripsi</label>
+                            <label for="inputRating">Rating Aplikasi</label>
+                            <select
+                                id="inputrating"
+                                name="rating"
+                                class="form-control @error('rating') is-invalid @enderror"
+                                required="required"
+                            >
+                                <option value="" disabled selected>Masukkan Rating  </option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                            @error('rating')
+                            <span class="invalid-rating" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputDeskripsi">deskripsi</label>
                             <textarea
-                                id="inputDeskripsi"
+                                id="inputdeskripsi"
                                 name="deskripsi"
                                 class="form-control @error('deskripsi') is-invalid @enderror"
                                 placeholder="Masukkan Deskripsi"
@@ -75,62 +104,12 @@
                                 autocomplete="deskripsi"
                             >{{ old('deskripsi') }}</textarea>
                             @error('deskripsi')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-deskripsi" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
                         
-                        <div class="form-group">
-                            <label for="inputBahan">Bahan</label>
-                            <input
-                                type="text"
-                                id="inputBahan"
-                                name="bahan"
-                                class="form-control @error('bahan') is-invalid @enderror"
-                                placeholder="Masukkan Bahan"
-                                required="required"
-                                autocomplete="bahan">
-                            @error('bahan')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inputAlat">Alat</label>
-                            <input
-                                type="text"
-                                id="inputAlat"
-                                name="alat"
-                                class="form-control @error('alat') is-invalid @enderror"
-                                placeholder="Masukkan alat"
-                                required="required"
-                                autocomplete="alat">
-                            @error('alat')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inputLangkah">Langkah</label>
-                            <textarea 
-                                name="langkah_tutorial" 
-                                id="inputLangkah" 
-                                cols="30" 
-                                rows="10" 
-                                class="form-control @error('langkah') is-invalid @enderror"
-                                placeholder="Masukkan langkah pembuatan"
-                                required="required">
-                            </textarea>
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -140,14 +119,14 @@
         <div class="row">
             <div class="col-12">
                 <a href="{{ route('home') }}" class="btn btn-secondary">Cancel</a>
-                <input type="submit" value="Tambah Tutorial" class="btn btn-success float-right">
+                <input type="submit" value="Tambah Rating" class="btn btn-success float-right">
             </div>
         </div>
         <input type="hidden" name="user_id" id="userId" value="">
     </form>
 </section>
-<!-- /.content -->
 
+<!-- /.content -->
 @endsection @section('script_footer')
 <script>
     inputFoto.onchange = evt => {

@@ -6,6 +6,8 @@ use App\Http\Controllers\FeedbackController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ratingcontroller;
+use App\Models\Rating;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +70,19 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::post('tambahFeedback', 'store')->name('store');
             Route::post('{id}/edit', 'editFeedback')->name('edit');
             Route::delete('{id}/delete', 'deleteFeedback')->name('delete');
+        });
+        Route::controller(RatingController::class)
+        ->prefix('rating')
+        ->as('rating.')
+        ->group(function (){
+            Route::get('rating', 'index')->name('index');
+            Route::get('rating/editPage', 'editRatingPage')->name('editPage');
+            Route::get('ratingDetail/{id}', [RatingController::class, 'showDetail'])->name('ratingDetail');
+            Route::get('rating/dataRating', [RatingController::class, 'getDataRating'])->name('dataRating');
+            Route::get('/viewTambah', 'addRatingPage')->name('tambah');
+            Route::post('tambahRating', 'store')->name('store');
+            Route::post('{id}/edit', 'editRating')->name('edit');
+            Route::delete('{id}/delete', 'deleteRating')->name('delete');
         });
 
         
