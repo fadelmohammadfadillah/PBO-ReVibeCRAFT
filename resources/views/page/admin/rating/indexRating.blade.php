@@ -1,5 +1,5 @@
 @extends('layouts.base_admin.base_dashboard')
-@section('judul', 'List Feedback')
+@section('judul', 'List Rating')
 @section('script_head')
 
 <link
@@ -95,18 +95,19 @@
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 <script>
     $(document).ready(function() {
-        $('#previewFeedback').DataTable({
+        $('#previewRating').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-            url: '{!! route('feedback.dataFeedback') !!}',
+            url: '{!! route('rating.dataRating') !!}',
+
             error: function(xhr, error, thrown) {
                 alert('DataTables error: ' + thrown + ' (Status: ' + xhr.status + ')');
             }
         },
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'user_id', name: 'user.id' },
+                // { data: 'user_id', name: 'user.id' },
                 { data: 'rating_id', name: 'rating.id' },
                 { data: 'rating', name: 'rating' },
                 { data: 'deskripsi', name: 'deskripsi' },
@@ -116,7 +117,7 @@
     });
 </script>
 <script>
-   $('#previewFeedback').on('click', '.hapusData', function () {
+   $('#previewRating').on('click', '.hapusData', function () {
     var id = $(this).data("id");
     var url = $(this).data("url");
     Swal
