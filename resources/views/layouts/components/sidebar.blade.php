@@ -59,7 +59,7 @@ $links = [
     ],
     [
       "text" => "Kelola rating",
-      "icon" => "fas fa-comment",
+      "icon" => "fas fa-star",
       "is_multi" => true,
       "href" =>[
           [

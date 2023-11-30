@@ -107,7 +107,7 @@
         },
             columns: [
                 { data: 'id', name: 'id' },
-                // { data: 'user_id', name: 'user.id' },
+                //{ data: 'user_id', name: 'user.id' },
                 { data: 'rating_id', name: 'rating.id' },
                 { data: 'rating', name: 'rating' },
                 { data: 'deskripsi', name: 'deskripsi' },

@@ -59,7 +59,7 @@
                                 value="{{ old('rating_id') }}"
                                 required="required"
                                 autocomplete="rating_id">
-                            @error('nama')
+                            @error('rating_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
