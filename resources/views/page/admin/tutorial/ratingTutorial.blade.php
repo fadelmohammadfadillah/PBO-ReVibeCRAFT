@@ -131,35 +131,6 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-
-                        <div class="form-group">
-                            <label for="inputFoto">Foto Barang</label>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <img
-                                        class="elevation-3"
-                                        id="prevImg"
-                                        src="{{ asset('vendor/adminlte3/img/user2-160x160.jpg') }}"
-                                        width="150px"/>
-                                </div>
-                                <div class="col-md-8">
-                                    <input
-                                        required="required"
-                                        type="file"
-                                        id="inputFoto"
-                                        name="foto"
-                                        accept="image/*"
-                                        class="form-control @error('user_image') is-invalid @enderror"
-                                        placeholder="Upload foto profil">
-                                </div>
-                            </div>
-
-                            @error('user_image')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
                     </div>
                     <!-- /.card-body -->
                 </div>
