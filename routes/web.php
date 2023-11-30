@@ -6,6 +6,8 @@ use App\Http\Controllers\FeedbackController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ratingcontroller;
+use App\Models\Rating;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,18 +59,32 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::delete('{id}/delete', 'deleteTutorial')->name('delete');
             Route::get('generateTutorialDocument', [TutorialController::class, 'generateTutorialDocument'])->name('generateTutorialDoc');
         });
-    Route::controller(FeedbackController::class)
+        Route::controller(FeedbackController::class)
         ->prefix('feedback')
         ->as('feedback.')
         ->group(function (){
             Route::get('feedback', 'index')->name('index');
             Route::get('feedback/editPage', 'editFeedbackPage')->name('editPage');
-            Route::get('feedbackDetail/{id}', [TutorialController::class, 'showDetail'])->name('feedbackDetail');
-            Route::get('feedback/dataFeedback', [TutorialController::class, 'getDataFeedback'])->name('dataFeedback');
+            Route::get('feedbackDetail/{id}', [FeedbackController::class, 'showDetail'])->name('feedbackDetail');
+            Route::get('feedback/dataFeedback', [FeedbackController::class, 'getDataFeedback'])->name('dataFeedback');
             Route::get('/viewTambah', 'addFeedbackPage')->name('tambah');
             Route::post('tambahFeedback', 'store')->name('store');
             Route::post('{id}/edit', 'editFeedback')->name('edit');
             Route::delete('{id}/delete', 'deleteFeedback')->name('delete');
         });
+        Route::controller(RatingController::class)
+        ->prefix('rating')
+        ->as('rating.')
+        ->group(function (){
+            Route::get('rating', 'index')->name('index');
+            Route::get('rating/editPage', 'editRatingPage')->name('editPage');
+            Route::get('ratingDetail/{id}', [RatingController::class, 'showDetail'])->name('ratingDetail');
+            Route::get('rating/dataRating', [RatingController::class, 'getDataRating'])->name('dataRating');
+            Route::get('/viewTambah', 'addRatingPage')->name('tambah');
+            Route::post('tambahRating', 'store')->name('store');
+            Route::post('{id}/edit', 'editRating')->name('edit');
+            Route::delete('{id}/delete', 'deleteRating')->name('delete');
+        });
+
         
 });

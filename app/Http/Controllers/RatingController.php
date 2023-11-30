@@ -2,35 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Feedback;
-use Intervention\Image\Facades\Image;
+use App\Http\Controllers\Controller;
+use App\Models\Rating;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
+use Illuminate\Http\Request;
 
-class FeedbackController extends Controller
+class ratingcontroller extends Controller
 {
     public function index(){
-        return view('page.admin.feedback.indexFeedback');
+        return view('page.admin.rating.indexRating');
     }
 
-    public function addFeedbackPage(){
-        return view('page.admin.feedback.addFeedback');
+    public function addRatingPage(){
+        return view('page.admin.rating.addRating');
     }
 
-    public function editFeedbackPage(){
-        return view('page.admin.feedback.editFeedback');
+    public function editRatingPage(){
+        return view('page.admin.rating.editRating');
     }
 
     public function showDetail($id){
-        $data = Feedback::findOrFail($id);
+        $data = rating::findOrFail($id);
         $resource = [];
         $resource['id'] = $data->id;
         // $resource['user_id'] = $data->user_id;
-        $resource['nama_pengguna'] = $data->nama_pengguna;
+        $resource['rating_id'] = $data->rating_id;
         $resource['rating'] = $data->rating;
-        $resource['alasan'] = $data->alasan;
+        $resource['deskripsi'] = $data->deskripsi;
         // $resource['alat'] = $data->alat;
         // $resource['langkah_tutorial'] = $data->langkah_tutorial;
         // $resource['foto'] = $data->foto;
@@ -41,15 +41,15 @@ class FeedbackController extends Controller
         ]);
     }
 
-    public function getDataFeedback(){
-        $dataFeedback = Feedback::select(['id', 'user_id', 'nama_pengguna', 'rating', 'alasan']);
-        return DataTables::of($dataFeedback)
+    public function getDataRating(){
+        $dataRating = Rating::select(['id', 'user_id', 'rating_id', 'rating', 'deskripsi']);
+        return DataTables::of($dataRating)
         // ->addColumn('user_name', function ($feedback) {
         //     return $feedback->user->name;
         // })
-        ->addColumn('action', function ($feedback) {
+        ->addColumn('action', function ($Rating) {
             // Tambahkan tombol aksi sesuai kebutuhan Anda
-            return '<a href="'.route('feedback.editPage', 'id='.$feedback->id).'" class="btn btn-info">Detail</a><a class="hapusData btn btn-danger" data-id="'.$feedback->id.'" data-url="'.route('feedback.delete',$feedback->id).'">Hapus</a>';
+            return '<a href="'.route('rating.editPage', 'id='.$Rating->id).'" class="btn btn-info">Detail</a><a class="hapusData btn btn-danger" data-id="'.$Rating->id.'" data-url="'.route('rating.delete',$Rating->id).'">Hapus</a>';
         })
         ->make(true);
     }
@@ -58,9 +58,9 @@ class FeedbackController extends Controller
         try{
             $validatedData = $request->validate([
                 'user_id' =>'required',
-                'nama_pengguna' => 'required',
+                'rating_id' => 'required',
                 'rating'=> 'required',
-                'alasan'=> 'required',
+                'deskripsi'=> 'required',
             ]);
         }catch(ValidationException $e){
             $response = [];
@@ -77,19 +77,19 @@ class FeedbackController extends Controller
         //     Storage::put('public/assets/fotos/' . $thumbnailName, (string) $webpImageData);
         // }
         // $validatedData['foto'] = $thumbnailName;
-        $feedback = Feedback::create($validatedData);
-        return redirect()->route('feedback.tambah')->with('status', 'data telah berhasil disimpan di database');
+        $feedback = Rating::create($validatedData);
+        return redirect()->route('rating.tambah')->with('status', 'data telah berhasil disimpan di database');
     }
 
-    public function editFeedback($id, Request $request){
+    public function editRating($id, Request $request){
         // dd($request);
         //fungsi untuk edit
-        $dataFeedback = Feedback::findOrFail($id);
+        $dataRating = Rating::findOrFail($id);
         $this->validate($request, [
             'user_id' =>'required',
-            'nama_pengguna' => 'required',
+            'rating_id' => 'required',
             'rating'=> 'required',
-            'alasan'=> 'required',
+            'deskripsi'=> 'required',
         ]);
         // $thumbnailName = $dataFeedback->foto;
         // if ($request->hasFile('foto')) {
@@ -103,19 +103,19 @@ class FeedbackController extends Controller
         //     $webpImageData->resize(200, 250);
         //     Storage::put('public/assets/fotos/' . $thumbnailName, (string) $webpImageData);
         // }
-        $dataFeedback->update([
+        $dataRating->update([
             'user_id' => $request->user_id,
-            'nama_pengguna' => $request->nama_pengguna,
+            'rating_id' => $request->rating_id,
             'rating'=> $request->rating,
-            'alasan'=> $request->alasan,
+            'deskripsi'=> $request->deskripsi,
         ]);
-        return redirect()->route('feedback.editPage')->with('status', 'Data telah tersimpan di database');
+        return redirect()->route('rating.editPage')->with('status', 'Data telah tersimpan di database');
     }
 
-    public function deleteFeedback($id){
+    public function deleteRating($id){
         //fungsi untuk delete
         try{
-            $destroy = Feedback::findOrFail($id);
+            $destroy = Rating::findOrFail($id);
             $destroy->delete();
 
             return response()->json([

@@ -54,6 +54,7 @@ class TutorialController extends Controller
             return '<a href="'.route('tutorial.editPage', 'id='.$tutorial->id).'" class="btn btn-success">Edit</a><a class="hapusData btn btn-danger" data-id="'.$tutorial->id.'" data-url="'.route('tutorial.delete',$tutorial->id).'">Hapus</a>';
         })
         ->make(true);
+
     }
 
     public function store(Request $request){

@@ -5,14 +5,14 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Edit Feedback</h1>
+                <h1>Edit Rating</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item">
                         <a href="{{ route('home') }}">Beranda</a>
                     </li>
-                    <li class="breadcrumb-item active">Edit Feedback</li>
+                    <li class="breadcrumb-item active">Edit Rating</li>
                 </ol>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Informasi FeedBack</h3>
+                        <h3 class="card-title">Informasi rating</h3>
                         <div class="card-tools">
                             <button
                                 type="button"
@@ -45,20 +45,20 @@
                                 <i class="fas fa-minus"></i>
                             </button>
                         </div>
-                    </div>
+                        </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="inputName">Nama</label>
+                            <label for="inputRatingId">Tutorial Id </label>
                             <input
                                 type="text"
-                                id="inputnama"
-                                name="nama_pengguna"
+                                id="inputratingid"
+                                name="rating_id"
                                 class="form-control @error('name') is-invalid @enderror"
-                                placeholder="Masukkan Nama"
-                                value="{{ old('judul_feedback') }}"
+                                placeholder="Masukkan Rating Id"
+                                value="{{ old('rating_id') }}"
                                 required="required"
-                                autocomplete="name">
-                            @error('nama')
+                                autocomplete="rating_id">
+                            @error('rating_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -73,30 +73,37 @@
                                 class="form-control @error('rating') is-invalid @enderror"
                                 required="required"
                             >
-                                <option value="" disabled selected></option>
-                                <option value="Bagus Sekali">Bagus Sekali</option>
-                                <option value="Bagus">Bagus</option>
-                                <option value="Buruk">Buruk</option>
+                                <option value="" disabled selected>Masukkan Rating  </option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
                             </select>
                             @error('rating')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-rating" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="inputAlasan">Alasan</label>
+                            <label for="inputDeskripsi">deskripsi</label>
                             <textarea
-                                id="inputalasan"
-                                name="alasan"
-                                class="form-control @error('alasan') is-invalid @enderror"
-                                placeholder="Masukkan Alasan"
+                                id="inputdeskripsi"
+                                name="deskripsi"
+                                class="form-control @error('deskripsi') is-invalid @enderror"
+                                placeholder="Masukkan Deskripsi"
                                 required="required"
-                                autocomplete="alasan"
-                            >{{ old('alasan') }}</textarea>
-                            @error('alasan')
-                            <span class="invalid-feedback" role="alert">
+                                autocomplete="deskripsi"
+                            >{{ old('deskripsi') }}</textarea>
+                            @error('deskripsi')
+                            <span class="invalid-deskripsi" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -111,7 +118,7 @@
         <div class="row">
             <div class="col-12">
                 <a href="{{ route('home') }}" class="btn btn-secondary">Cancel</a>
-                <input type="submit" value="Tambah Feedback" class="btn btn-success float-right">
+                <input type="submit" value="Tambah Rating" class="btn btn-success float-right">
             </div>
         </div>
         <input type="hidden" name="user_id" id="userId" value="">
@@ -131,21 +138,21 @@
 <script>
     console.log(window.location.search);
     let queryURL = new URLSearchParams(window.location.search);
-    const idFeedback = queryURL.get('id');
+    const idRating = queryURL.get('id');
     // /tutorialDetail/{id}
-    console.log('/feedbackDetail/'+idFeedback);
+    console.log('/RatingDetail/'+idRating);
     $(document).ready(function(){
         $.ajax({
-            url: '/dashboard/admin/feedback/feedbackDetail/'+idFeedback,
+            url: '/dashboard/admin/rating/RatingDetail/'+idRating,
             type: 'GET',
             success: function(response){
                 // console.log(`storage/assets/fotos/${response.data.foto}`);
-                // $('#userId').val(response.data.user_id);
-                $('#inputnama').val(response.data.nama_pengguna);
+                $('#userId').val(response.data.user_id);
+                $('#inputrating').val(response.data.rating_id);
                 $('#inputrating').val(response.data.rating);
-                $('#inputalasan').val(response.data.alasan);
+                $('#inputdeskripsi').val(response.data.deskripsi);
                 // $('#prevImg').attr("src", `{{ asset('storage/assets/fotos/${response.data.foto}')}}`);
-                $('form').attr('action', '/dashboard/admin/feedback/'+idFeedback+'/edit');
+                $('form').attr('action', '/dashboard/admin/deskripsi/'+idRating+'/edit');
             },
             error: function(error){
                 console.error('error', error);

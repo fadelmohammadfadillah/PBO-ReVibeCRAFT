@@ -1,5 +1,5 @@
 @extends('layouts.base_admin.base_dashboard')
-@section('judul', 'List Feedback')
+@section('judul', 'List Rating')
 @section('script_head')
 
 <link
@@ -16,7 +16,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Data Feedback</h1>
+                <h1>Data Rating</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -69,16 +69,16 @@
         </div>
         <div class="card-body p-0" style="margin: 20px">
             <table
-                id="previewFeedback"
+                id="previewRating"
                 class="table table-striped table-bordered display"
                 style="width:100%">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        {{-- <th>User</th> --}}
-                        <th>Nama Pengguna</th>
+                        {{-- <th>UserId</th> --}}
+                        <th>Tutorial id</th>
                         <th>Rating</th>
-                        <th>Alasan</th>
+                        <th>deksripsi</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -95,11 +95,12 @@
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 <script>
     $(document).ready(function() {
-        $('#previewFeedback').DataTable({
+        $('#previewRating').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-            url: '{!! route('feedback.dataFeedback') !!}',
+            url: '{!! route('rating.dataRating') !!}',
+
             error: function(xhr, error, thrown) {
                 alert('DataTables error: ' + thrown + ' (Status: ' + xhr.status + ')');
             }
@@ -107,16 +108,16 @@
             columns: [
                 { data: 'id', name: 'id' },
                 // { data: 'user_id', name: 'user.id' },
-                { data: 'nama_pengguna', name: 'nama_pengguna' },
+                { data: 'rating_id', name: 'rating.id' },
                 { data: 'rating', name: 'rating' },
-                { data: 'alasan', name: 'alasan' },
+                { data: 'deskripsi', name: 'deskripsi' },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });
     });
 </script>
 <script>
-   $('#previewFeedback').on('click', '.hapusData', function () {
+   $('#previewRating').on('click', '.hapusData', function () {
     var id = $(this).data("id");
     var url = $(this).data("url");
     Swal

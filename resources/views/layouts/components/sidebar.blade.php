@@ -56,6 +56,23 @@ $links = [
             "section_href" => route('feedback.tambah')
           ]
       ]
+    ],
+    [
+      "text" => "Kelola rating",
+      "icon" => "fas fa-comment",
+      "is_multi" => true,
+      "href" =>[
+          [
+            "section_text" => "Data Rating",
+            "section_icon" => "far fa-circle",
+            "section_href" => route('rating.index')
+          ],
+          [
+            "section_text" => "Tambah Rating",
+            "section_icon" => "far fa-circle",
+            "section_href" => route('rating.tambah')
+          ]
+      ]
     ]
 
 ];
