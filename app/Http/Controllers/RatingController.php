@@ -27,7 +27,7 @@ class ratingcontroller extends Controller
         $data = rating::findOrFail($id);
         $resource = [];
         $resource['id'] = $data->id;
-        $resource['user_id'] = $data->user_id;
+        // $resource['user_id'] = $data->user_id;
         $resource['rating_id'] = $data->rating_id;
         $resource['rating'] = $data->rating;
         $resource['deskripsi'] = $data->deskripsi;
