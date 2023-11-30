@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
 use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
+use Illuminate\Http\Response;
 
 class TutorialController extends Controller
 {
@@ -150,17 +152,16 @@ class TutorialController extends Controller
         $phpWord->setDefaultFontSize(12);
         $section = $phpWord->addSection();
         foreach ($dataTutorial as $data){
-            $section->addText('Judul Tutorial\t:'.$data->judul_tutorial);
-            $section->addText('Deskripsi\t: '.$data->deskripsi);
-            $section->addText('bahan\t:'.$data->bahan);
-            $section->addText('alat\t:'.$data->alat);
-            $section->addText('langkah_tutorial\t:'.$data->langkah_tutorial);
+            $section->addText('Judul Tutorial:'.$data->judul_tutorial);
+            $section->addText('Deskripsi: '.$data->deskripsi);
+            $section->addText('bahan:'.$data->bahan);
+            $section->addText('alat:'.$data->alat);
+            $section->addText('langkah_tutorial:'.$data->langkah_tutorial);
             $section->addText('');
         }
-
+        $file = 'document_data_tutorial.docx';
+        
         $filename = $filename = storage_path('app/public/document_data_tutorial.docx');
         $phpWord->save($filename);
-
-        // return response()->download('document_data_tutorial.docx');
     }
 }

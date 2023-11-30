@@ -68,8 +68,8 @@
             </div>
         </div>
         <div class="card-body p-0" style="margin: 20px">
-            <div>
-                {{-- <a href="{{ route('tutorial.generateTutorialDoc') }}" class="btn btn-info">Generate Document</a> --}}
+            <div class="flex text-right pb-4">
+                {{-- <a class="btn btn-info" href="{{ route('tutorial.generateTutorialDoc') }}" class="btn btn-info">Generate Document</a> --}}
                 <button class="btn btn-info" id="generateDoc">Generate Document</button>
             </div>
             <table
