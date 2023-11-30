@@ -92,10 +92,10 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
         ->prefix('report')
         ->as('report.')
         ->group(function (){
-            Route::get('/report', 'index')->name('index');
+            Route::get('report', 'index')->name('index');
             Route::post('{id}/report', 'store')->name('report');
             Route::get('/list', 'list')->name('list');
-            Route::get('tutorialReport/{id}', [reportController::class, 'showReport'])->name('tutoriaReport');
+            Route::get('tutorialReport/{id}', [reportController::class, 'showReport'])->name('tutorialReport');
             Route::get('/dataReportTutorial', [reportController::class, 'getDataReport'])->name('dataReportTutorial');
             Route::delete('{id}/delete', 'deleteReport')->name('delete');
         });
