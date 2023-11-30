@@ -16,7 +16,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Data Akun</h1>
+                <h1>Data Feedback</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -75,11 +75,11 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>User</th>
+                        {{-- <th>User</th> --}}
                         <th>Nama Pengguna</th>
                         <th>Rating</th>
                         <th>Alasan</th>
-                        {{-- <th>Action</th> --}}
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -106,7 +106,7 @@
         },
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'user_id', name: 'user.id' },
+                // { data: 'user_id', name: 'user.id' },
                 { data: 'nama_pengguna', name: 'nama_pengguna' },
                 { data: 'rating', name: 'rating' },
                 { data: 'alasan', name: 'alasan' },

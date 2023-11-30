@@ -27,7 +27,7 @@ class FeedbackController extends Controller
         $data = Feedback::findOrFail($id);
         $resource = [];
         $resource['id'] = $data->id;
-        $resource['user_id'] = $data->user_id;
+        // $resource['user_id'] = $data->user_id;
         $resource['nama_pengguna'] = $data->nama_pengguna;
         $resource['rating'] = $data->rating;
         $resource['alasan'] = $data->alasan;

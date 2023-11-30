@@ -140,7 +140,7 @@
             type: 'GET',
             success: function(response){
                 // console.log(`storage/assets/fotos/${response.data.foto}`);
-                $('#userId').val(response.data.user_id);
+                // $('#userId').val(response.data.user_id);
                 $('#inputnama').val(response.data.nama_pengguna);
                 $('#inputrating').val(response.data.rating);
                 $('#inputalasan').val(response.data.alasan);

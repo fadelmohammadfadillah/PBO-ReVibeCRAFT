@@ -64,8 +64,8 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
         ->group(function (){
             Route::get('feedback', 'index')->name('index');
             Route::get('feedback/editPage', 'editFeedbackPage')->name('editPage');
-            Route::get('feedbackDetail/{id}', [TutorialController::class, 'showDetail'])->name('feedbackDetail');
-            Route::get('feedback/dataFeedback', [TutorialController::class, 'getDataFeedback'])->name('dataFeedback');
+            Route::get('feedbackDetail/{id}', [FeedbackController::class, 'showDetail'])->name('feedbackDetail');
+            Route::get('feedback/dataFeedback', [FeedbackController::class, 'getDataFeedback'])->name('dataFeedback');
             Route::get('/viewTambah', 'addFeedbackPage')->name('tambah');
             Route::post('tambahFeedback', 'store')->name('store');
             Route::post('{id}/edit', 'editFeedback')->name('edit');
