@@ -16,14 +16,14 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Data Akun</h1>
+                <h1>Data Tutorial dilaporkan</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item">
                         <a href="{{ route('home') }}">Beranda</a>
                     </li>
-                    <li class="breadcrumb-item active">Akun</li>
+                    <li class="breadcrumb-item active">tutoriaReport</li>
                 </ol>
             </div>
         </div>
@@ -77,24 +77,16 @@
             </div>
         </div>
         <div class="card-body p-0" style="margin: 20px">
-            <div>
-                {{-- <a href="{{ route('tutorial.generateTutorialDoc') }}" class="btn btn-info">Generate Document</a> --}}
-                <button class="btn btn-info" id="generateDoc">Generate Document</button>
-            </div>
             <table
-                id="previewTutorial"
+                id="previewReport"
                 class="table table-striped table-bordered display"
                 style="width:100%">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>User</th>
+                        <th>Tutorial ID</th>
                         <th>Judul Tutorial</th>
                         <th>Deskripsi</th>
-                        <th>Bahan</th>
-                        <th>Alat</th>
-                        <th>Langkah Tutorial</th>
-                        <th>Foto</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -111,26 +103,22 @@
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 <script>
     $(document).ready(function() {
-        $('#previewTutorial').DataTable({
+        $('#previewReport').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('tutorial.dataTutorial') !!}',
+            ajax: '{!! route('report.dataReportTutorial') !!}',
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'user_name', name: 'user.name' },
+                { data: 'tutorial_id', name: 'tutorial_id' },
                 { data: 'judul_tutorial', name: 'judul_tutorial' },
                 { data: 'deskripsi', name: 'deskripsi' },
-                { data: 'bahan', name: 'bahan' },
-                { data: 'alat', name: 'alat' },
-                { data: 'langkah_tutorial', name: 'langkah_tutorial' },
-                { data: 'foto', name: 'foto' },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });
     });
 </script>
 <script>
-   $('#previewTutorial').on('click', '.hapusData', function () {
+   $('#previewReport').on('click', '.hapusData', function () {
     var id = $(this).data("id");
     var url = $(this).data("url");
     Swal
@@ -157,27 +145,11 @@
                     success: function (response) {
                         // console.log();
                         Swal.fire('Terhapus!', response.msg, 'success');
-                        $('#previewAkun').DataTable().ajax.reload();
+                        $('#previewReport').DataTable().ajax.reload();
                     }
                 });
             }
         })
 });
-</script>
-<script>
-    $('#generateDoc').on('click', function () {
-        $.ajax({
-            url: '{!! route('tutorial.generateTutorialDoc') !!}',
-            type: 'GET',
-            data: {
-                "_token": "{{csrf_token()}}"
-            },
-            success: function (response) {
-                // console.log();
-                Swal.fire('Berhasil disimpan!', response.msg, 'success');
-                // $('#previewAkun').DataTable().ajax.reload();
-            }
-        });
-    });
 </script>
 @endsection

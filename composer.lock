@@ -4158,6 +4158,7 @@
         },
         {
             "name": "symfony/http-kernel",
+<<<<<<< HEAD
             "version": "v6.4.0",
             "source": {
                 "type": "git",
@@ -4168,6 +4169,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-kernel/zipball/16a29c453966f29466ad34444ce97970a336f3c8",
                 "reference": "16a29c453966f29466ad34444ce97970a336f3c8",
+=======
+            "version": "v6.4.0-RC2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-kernel.git",
+                "reference": "93e0ff05f27fc8f0d1218d811ba1072ccd9ed763"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/93e0ff05f27fc8f0d1218d811ba1072ccd9ed763",
+                "reference": "93e0ff05f27fc8f0d1218d811ba1072ccd9ed763",
+>>>>>>> 0e47b00286cb3304f6e5c7b39c12b4b5bc799bfa
                 "shasum": ""
             },
             "require": {
@@ -4251,7 +4264,11 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/http-kernel/tree/v6.4.0"
+=======
+                "source": "https://github.com/symfony/http-kernel/tree/v6.4.0-RC2"
+>>>>>>> 0e47b00286cb3304f6e5c7b39c12b4b5bc799bfa
             },
             "funding": [
                 {
@@ -4267,7 +4284,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2023-11-29T10:40:15+00:00"
+=======
+            "time": "2023-11-26T17:58:31+00:00"
+>>>>>>> 0e47b00286cb3304f6e5c7b39c12b4b5bc799bfa
         },
         {
             "name": "symfony/mailer",

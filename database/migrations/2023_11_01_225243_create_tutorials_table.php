@@ -24,6 +24,14 @@ return new class extends Migration
             $table->string('foto');
             $table->timestamps();
         });
+
+        Schema::create('report', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('tutorial_id');
+            $table->string('judul_tutorial');
+            $table->text('deskripsi');
+            $table->timestamps();
+        });
     }
 
     /**
