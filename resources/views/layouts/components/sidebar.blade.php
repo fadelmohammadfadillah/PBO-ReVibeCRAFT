@@ -37,7 +37,13 @@ $links = [
             "section_text" => "Tambah Tutorial",
             "section_icon" => "far fa-circle",
             "section_href" => route('tutorial.tambah')
+          ],
+          [
+            "section_text" => "Tutorial dilaporkan",
+            "section_icon" => "far fa-circle",
+            "section_href" => route('report.list')
           ]
+
       ]
     ],
     [
@@ -59,7 +65,7 @@ $links = [
     ],
     [
       "text" => "Kelola rating",
-      "icon" => "fas fa-comment",
+      "icon" => "fas fa-star",
       "is_multi" => true,
       "href" =>[
           [

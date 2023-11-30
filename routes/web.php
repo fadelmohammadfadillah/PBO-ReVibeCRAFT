@@ -6,8 +6,10 @@ use App\Http\Controllers\FeedbackController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ratingcontroller;
-use App\Models\Rating;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\reportController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -86,5 +88,17 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::delete('{id}/delete', 'deleteRating')->name('delete');
         });
 
+    Route::controller(reportController::class)
+        ->prefix('report')
+        ->as('report.')
+        ->group(function (){
+            Route::get('report', 'index')->name('index');
+            Route::post('{id}/report', 'store')->name('report');
+            Route::get('/list', 'list')->name('list');
+            Route::get('tutorialReport/{id}', [reportController::class, 'showReport'])->name('tutorialReport');
+            Route::get('/dataReportTutorial', [reportController::class, 'getDataReport'])->name('dataReportTutorial');
+            Route::delete('{id}/delete', 'deleteReport')->name('delete');
+        });
         
 });
+

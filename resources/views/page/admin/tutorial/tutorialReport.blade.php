@@ -1,5 +1,5 @@
 @extends('layouts.base_admin.base_dashboard')
-@section('judul', 'List Rating')
+@section('judul', 'List Tutorial')
 @section('script_head')
 
 <link
@@ -16,14 +16,14 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Data Rating</h1>
+                <h1>Data Tutorial dilaporkan</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item">
                         <a href="{{ route('home') }}">Beranda</a>
                     </li>
-                    <li class="breadcrumb-item active">Akun</li>
+                    <li class="breadcrumb-item active">tutoriaReport</li>
                 </ol>
             </div>
         </div>
@@ -39,6 +39,15 @@
         {{ session('status') }}
     </div>
     @endif
+
+    @if(session('report'))
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-check"></i> Data berhasil dilaporkan!</h4>
+        {{ session('report') }}
+    </div>
+    @endif
+
     @if(session('error'))
     <div class="alert alert-danger alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -69,16 +78,15 @@
         </div>
         <div class="card-body p-0" style="margin: 20px">
             <table
-                id="previewRating"
+                id="previewReport"
                 class="table table-striped table-bordered display"
                 style="width:100%">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        {{-- <th>UserId</th> --}}
-                        <th>Tutorial id</th>
-                        <th>Rating</th>
-                        <th>deksripsi</th>
+                        <th>Tutorial ID</th>
+                        <th>Judul Tutorial</th>
+                        <th>Deskripsi</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -95,21 +103,14 @@
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 <script>
     $(document).ready(function() {
-        $('#previewRating').DataTable({
+        $('#previewReport').DataTable({
             processing: true,
             serverSide: true,
-            ajax: {
-            url: '{!! route('rating.dataRating') !!}',
-
-            error: function(xhr, error, thrown) {
-                alert('DataTables error: ' + thrown + ' (Status: ' + xhr.status + ')');
-            }
-        },
+            ajax: '{!! route('report.dataReportTutorial') !!}',
             columns: [
                 { data: 'id', name: 'id' },
-                //{ data: 'user_id', name: 'user.id' },
-                { data: 'rating_id', name: 'rating.id' },
-                { data: 'rating', name: 'rating' },
+                { data: 'tutorial_id', name: 'tutorial_id' },
+                { data: 'judul_tutorial', name: 'judul_tutorial' },
                 { data: 'deskripsi', name: 'deskripsi' },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
@@ -117,7 +118,7 @@
     });
 </script>
 <script>
-   $('#previewRating').on('click', '.hapusData', function () {
+   $('#previewReport').on('click', '.hapusData', function () {
     var id = $(this).data("id");
     var url = $(this).data("url");
     Swal
@@ -144,7 +145,7 @@
                     success: function (response) {
                         // console.log();
                         Swal.fire('Terhapus!', response.msg, 'success');
-                        $('#previewAkun').DataTable().ajax.reload();
+                        $('#previewReport').DataTable().ajax.reload();
                     }
                 });
             }

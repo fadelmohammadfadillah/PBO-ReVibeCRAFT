@@ -52,8 +52,9 @@ class TutorialController extends Controller
             return $tutorial->user->name;
         })
         ->addColumn('action', function ($tutorial) {
-            // Tambahkan tombol aksi sesuai kebutuhan Anda
-            return '<a href="'.route('tutorial.editPage', 'id='.$tutorial->id).'" class="btn btn-success">Edit</a><a class="hapusData btn btn-danger" data-id="'.$tutorial->id.'" data-url="'.route('tutorial.delete',$tutorial->id).'">Hapus</a>';
+            return '<a href="' . route('tutorial.editPage', 'id=' . $tutorial->id) . '" class="btn btn-success">Edit</a>
+                <a class="hapusData btn btn-danger" data-id="' . $tutorial->id . '" data-url="' . route('tutorial.delete', $tutorial->id) . '">Hapus</a>
+                <a class="reportData btn btn-danger" href="' . route('report.index' ,'id='. $tutorial->id) . '">report</a>';
         })
         ->make(true);
 
