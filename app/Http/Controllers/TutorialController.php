@@ -8,6 +8,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
+use PhpOffice\PhpWord\PhpWord;
 
 class TutorialController extends Controller
 {
@@ -50,7 +51,7 @@ class TutorialController extends Controller
         })
         ->addColumn('action', function ($tutorial) {
             // Tambahkan tombol aksi sesuai kebutuhan Anda
-            return '<a href="'.route('tutorial.editPage', 'id='.$tutorial->id).'" class="btn btn-info">Detail</a><a class="hapusData btn btn-danger" data-id="'.$tutorial->id.'" data-url="'.route('tutorial.delete',$tutorial->id).'">Hapus</a>';
+            return '<a href="'.route('tutorial.editPage', 'id='.$tutorial->id).'" class="btn btn-success">Edit</a><a class="hapusData btn btn-danger" data-id="'.$tutorial->id.'" data-url="'.route('tutorial.delete',$tutorial->id).'">Hapus</a>';
         })
         ->make(true);
     }
@@ -138,5 +139,27 @@ class TutorialController extends Controller
                 'status'    => 404
             ]);
         }
+    }
+
+    public function generateTutorialDocument(){
+        $dataTutorial = Tutorial::all();
+
+        $phpWord = new PhpWord();
+        $phpWord->setDefaultFontName('Times New Roman');
+        $phpWord->setDefaultFontSize(12);
+        $section = $phpWord->addSection();
+        foreach ($dataTutorial as $data){
+            $section->addText('Judul Tutorial\t:'.$data->judul_tutorial);
+            $section->addText('Deskripsi\t: '.$data->deskripsi);
+            $section->addText('bahan\t:'.$data->bahan);
+            $section->addText('alat\t:'.$data->alat);
+            $section->addText('langkah_tutorial\t:'.$data->langkah_tutorial);
+            $section->addText('');
+        }
+
+        $filename = $filename = storage_path('app/public/document_data_tutorial.docx');
+        $phpWord->save($filename);
+
+        // return response()->download('document_data_tutorial.docx');
     }
 }

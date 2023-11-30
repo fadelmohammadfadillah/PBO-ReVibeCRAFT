@@ -55,6 +55,7 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::post('tambahTutorial', 'store')->name('store');
             Route::post('{id}/edit', 'editTutorial')->name('edit');
             Route::delete('{id}/delete', 'deleteTutorial')->name('delete');
+            Route::get('generateTutorialDocument', [TutorialController::class, 'generateTutorialDocument'])->name('generateTutorialDoc');
         });
     Route::controller(FeedbackController::class)
         ->prefix('feedback')
