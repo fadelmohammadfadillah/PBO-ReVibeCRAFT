@@ -109,7 +109,6 @@
             url: '/dashboard/admin/report/tutorialReport/'+idTutorial,
             type: 'GET',
             success: function(response){
-                console.log(`storage/assets/fotos/${response.data.foto}`);
                 $('#inputJudul').val(response.data.judul_tutorial);
                 $('form').attr('action', '/dashboard/admin/report/'+idTutorial+'/report');
             },
