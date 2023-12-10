@@ -118,7 +118,8 @@ class AkunController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'user_image' => $img
+                'user_image' => $img,
+                'role' => 'user'
             ]);
             return redirect()->route('akun.add')->with('status', 'Data telah tersimpan di database');
         }

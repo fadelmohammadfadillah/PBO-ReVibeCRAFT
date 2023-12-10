@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\reportController;
-
+use App\Models\Tutorial;
 
 
 /*
@@ -23,12 +23,15 @@ use App\Http\Controllers\reportController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $tutorials = Tutorial::take(3)->get();
+    return view('welcome', compact('tutorials'));
 });
 
 Auth::routes();
-
-Route::group(['prefix' => 'dashboard/admin'], function () {
+Route::post('addFeedback',[FeedbackController::class, 'store'] )->name('feedbackUser');
+Route::get('/view/{tutorial}', [TutorialController::class, 'viewArticleTutorial'])->name('artikelTutorial');
+Route::get('/formFeedback', [FeedbackController::class, 'viewFormFeedback'])->name('viewFormFeedback');
+Route::group(['prefix' => 'dashboard/admin', 'middleware'=>['auth', 'role:admin']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::group(['prefix' => 'profile'], function () {
@@ -101,4 +104,5 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
         });
         
 });
+
 

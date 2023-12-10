@@ -7,6 +7,7 @@ use App\Models\Feedback;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class FeedbackController extends Controller
@@ -21,6 +22,11 @@ class FeedbackController extends Controller
 
     public function editFeedbackPage(){
         return view('page.admin.feedback.editFeedback');
+    }
+
+    public function viewFormFeedback(){
+        $userId = Auth::user()->id;
+        return view('feedbackPage', compact('userId'));
     }
 
     public function showDetail($id){
@@ -78,7 +84,11 @@ class FeedbackController extends Controller
         // }
         // $validatedData['foto'] = $thumbnailName;
         $feedback = Feedback::create($validatedData);
-        return redirect()->route('feedback.tambah')->with('status', 'data telah berhasil disimpan di database');
+        if($request->user_id == 1){
+            return redirect()->route('feedback.tambah')->with('status', 'data telah berhasil disimpan di database');
+        }else {
+            return redirect()->route('feedbackPage')->with('status', 'data feedback telah berhasil disimpan di database');
+        }
     }
 
     public function editFeedback($id, Request $request){

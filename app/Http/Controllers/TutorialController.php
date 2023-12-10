@@ -26,6 +26,10 @@ class TutorialController extends Controller
         return view('page.admin.tutorial.editTutorial');
     }
 
+    public function viewArticleTutorial(Tutorial $tutorial){
+        return view('artikelTutorial', compact('tutorial'));
+    }
+
     public function showDetail($id){
         $data = Tutorial::findOrFail($id);
         $resource = [];
@@ -54,7 +58,7 @@ class TutorialController extends Controller
         ->addColumn('action', function ($tutorial) {
             return '<a href="' . route('tutorial.editPage', 'id=' . $tutorial->id) . '" class="btn btn-success">Edit</a>
                 <a class="hapusData btn btn-danger" data-id="' . $tutorial->id . '" data-url="' . route('tutorial.delete', $tutorial->id) . '">Hapus</a>
-                <a class="reportData btn btn-danger" href="' . route('report.index' ,'id='. $tutorial->id) . '">report</a>';
+                <a class="reportData btn btn-warning" href="' . route('report.index' ,'id='. $tutorial->id) . '">report</a>';
         })
         ->make(true);
 

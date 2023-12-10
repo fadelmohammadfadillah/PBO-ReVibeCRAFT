@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@yield('judul') | Laravel 9 - AdminLTE 3</title>
+        <title>@yield('judul') | ReVibeCRAFT</title>
 
         <!-- Google Font: Source Sans Pro -->
         <link
@@ -17,8 +17,9 @@
             href="{{ asset('vendor/adminlte3/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
         <!-- Theme style -->
         <link rel="stylesheet" href="{{ asset('vendor/adminlte3/css/adminlte.min.css') }}">
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="hold-transition
+    <body class="hold-transition bg-white
     @if (Route::is('login') || Route::is('password.request') || Route::is('password.reset'))
     login-page
     @elseif (Route::is('register'))

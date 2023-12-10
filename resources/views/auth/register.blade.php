@@ -1,13 +1,13 @@
 @extends('layouts.base_admin.base_auth')@section('judul', 'Halaman Registrasi') @section('content')
 <div class="register-box">
     <div class="register-logo">
-        <a href="#">
-            <b>Admin</b>LTE</a>
+        <a href="{{ url('/') }}">
+            <b>ReVibeCRAFT</b></a>
     </div>
 
-    <div class="card">
-        <div class="card-body register-card-body">
-            <p class="login-box-msg">Registrasi Akun Baru</p>
+    <div class="card text-white">
+        <div class="card-body register-card-body bg-orange-400">
+            <p class="login-box-msg text-white">Registrasi Akun Baru</p>
 
             <form action="{{ route('register') }}" method="post">
                 @csrf
@@ -25,7 +25,7 @@
                     {{-- <input type="text" class="form-control"> --}}
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-user"></span>
+                            <span class="fas fa-user text-white"></span>
                         </div>
                     </div>
                     @error('name')
@@ -47,7 +47,7 @@
                     {{-- <input type="email" class="form-control" > --}}
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                            <span class="fas fa-envelope text-white"></span>
                         </div>
                     </div>
                     @error('email')
@@ -68,7 +68,7 @@
                     {{-- <input type="password" class="form-control" > --}}
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                            <span class="fas fa-lock text-white"></span>
                         </div>
                     </div>
                     @error('password')
@@ -89,23 +89,23 @@
                     {{-- <input type="password" class="form-control" > --}}
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                            <span class="fas fa-lock text-white"></span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-8 text-white">
                         {{-- <div class="icheck-primary">
                 <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                 <label for="agreeTerms">
                  I agree to the <a href="#">terms</a>
                 </label>
               </div> --}}
-               Sudah punya akun? <a href="{{ route('login') }}" class="text-center">Login</a>
+               Sudah punya akun? <a href="{{ route('login') }}" class="text-center text-white">Login</a>
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Registrasi</button>
+                        <button type="submit" class="btn btn-block bg-orange-100 hover:bg-white hover:text-orange-300">Registrasi</button>
                     </div>
                     <!-- /.col -->
                 </div>
