@@ -74,6 +74,13 @@
                 </div>
             </nav>
         </header>
+        @if(session('report'))
+            <div class="bg-orange-500 text-white">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Berhasil!</h4>
+                {{ session('report') }}
+            </div>
+        @endif
         <div class="relative isolate px-6 py-14 pb-32 lg:px-8 bg-orange-300">
             <!-- Container -->
             <div class="container mt-16 mx-auto p-4 md:p-0">
@@ -120,7 +127,8 @@
                         <!-- ./Card description -->
                         
                         <!-- Call to action button -->
-                        <div class="w-full lg:w-1/5 mt-6 lg:mt-0 lg:px-4 text-center md:text-left">
+                        <div class="mt-6 lg:mt-0 lg:px-4 text-center md:text-left">
+                            <a href="{{ route('reportTutorialPage', $tutorial) }}" class="rounded-md bg-white px-3.5 py-2.5 mb-8 text-sm font-semibold text-orange-400 shadow-sm hover:text-orange-500 outline outline-2 outline-orange-300">report</a>
                             <a href="{{url('/')}}" class="rounded-md bg-orange-500  px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">kembali</a>
                         </div>
                         <!-- ./Call to action button -->

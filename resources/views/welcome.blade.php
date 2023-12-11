@@ -128,10 +128,10 @@
                         </div>
                     @endforeach
                 </div>
+                <a href="{{route('viewFormFeedback')}}" class="rounded-md bg-white my-16 px-3.5 py-2.5 text-sm font-semibold text-orange-500 shadow-sm hover:text-orange-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Berikan Feedback</a>
             </div>
         </div>
         <!-- Tambahkan tombol untuk membuka modal -->
-        <a href="{{route('viewFormFeedback')}}" class="rounded-md bg-orange-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Buka Modal</a>
 
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     </body>

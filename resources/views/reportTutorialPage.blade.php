@@ -80,55 +80,33 @@
         <section class="content bg-orange-300 py-48 h-full flex justify-center item-center">
             <div class="max-w-md bg-white rounded overflow-hidden shadow-lg">
                 <div class="px-6 py-4">
-                    @if(session('status'))
-                    <div class="bg-orange-500 text-white">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><i class="icon fa fa-check"></i> Berhasil!</h4>
-                        {{ session('status') }}
-                    </div>
-                    @endif
-                    <b class="text-center text-2xl block py-2 pb-8">Feedback</b>
-                    <form method="post" action="{{ route('feedbackUser') }}" enctype="multipart/form-data">
+                    <b class="text-center text-2xl block py-2 pb-8">Report Tutorial</b>
+                    <form method="post" action="{{ url($tutorial->id.'/addReport') }}" enctype="multipart/form-data">
                         @csrf
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 gap-4">
                             <div class="mb-4">
-                                <label for="inputnama" class="block text-sm font-medium text-gray-700">Nama</label>
-                                <input type="text" id="inputnama" name="nama_pengguna" 
-                                    class="mt-1 p-2 w-full border rounded-md @error('nama_pengguna') border-red-500 @enderror" 
-                                    placeholder="Masukkan Nama" value="{{ old('nama_pengguna') }}" required autocomplete="nama_pengguna">
-                                @error('nama_pengguna')
+                                <label for="inputJudul" class="block text-sm font-medium text-gray-700">Judul</label>
+                                <input type="text" id="inputJudul" name="judul_tutorial" 
+                                    class="mt-1 p-2 pr-8 w-full border rounded-md @error('judul_tutorial') border-red-500 @enderror" 
+                                    placeholder="Judul" value="{{ $tutorial->judul_tutorial }}" required autocomplete="judul_tutorial">
+                                @error('judul_tutorial')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
                 
                             <div class="mb-4">
-                                <label for="inputrating" class="block text-sm font-medium text-gray-700">Rating Aplikasi</label>
-                                <select id="inputrating" name="rating" 
-                                    class="mt-1 p-2 w-full border rounded-md @error('rating') border-red-500 @enderror" required>
-                                    <option value="" disabled selected>Masukkan Rating</option>
-                                    <option value="Bagus Sekali">Bagus Sekali</option>
-                                    <option value="Bagus">Bagus</option>
-                                    <option value="Buruk">Buruk</option>
-                                </select>
-                                @error('rating')
+                                <label for="inputDeskripsi" class="block text-sm font-medium text-gray-700">Deskripsi kesalahan</label>
+                                <textarea type="text" id="inputDeskripsi" name="deskripsi" 
+                                class="mt-1 p-2 pr-32 w-full border rounded-md @error('deskripsi') border-red-500 @enderror" 
+                                placeholder="Masukkan alasan tutorial dilaporkan" value="{{ old('deskripsi') }}" required autocomplete="deskripsi"></textarea>
+                                @error('deskripsi')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
-                
-                        <div class="mb-4">
-                            <label for="inputalasan" class="block text-sm font-medium text-gray-700">Alasan</label>
-                            <textarea id="inputalasan" name="alasan" 
-                                class="mt-1 p-2 w-full border rounded-md @error('alasan') border-red-500 @enderror" 
-                                placeholder="Masukkan Alasan" required autocomplete="alasan">{{ old('alasan') }}</textarea>
-                            @error('alasan')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                
                         <div class="flex justify-end">
                             <a href="{{ url('/') }}" class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-orange-400 shadow-sm hover:text-orange-500 outline outline-2 outline-orange-300">Cancel</a>
-                            <button type="submit" class="rounded-md text-white px-3.5 py-2.5 text-sm font-semibold bg-orange-300 shadow-sm hover:bg-orange-500 ml-2">Tambah Feedback</button>
+                            <button type="submit" class="rounded-md text-white px-3.5 py-2.5 text-sm font-semibold bg-orange-300 shadow-sm hover:bg-orange-500 ml-2">Report Tutorial</button>
                         </div>
                 
                         <input type="hidden" name="user_id" id="userId" value="">

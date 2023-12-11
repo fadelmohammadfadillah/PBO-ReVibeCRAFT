@@ -7,6 +7,7 @@ use App\Models\Tutorial;
 use App\Models\Report;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class reportController extends Controller
@@ -20,6 +21,10 @@ class reportController extends Controller
     public function list()
     {
         return view('page.admin.tutorial.tutorialReport');
+    }
+
+    public function viewReportPage(Tutorial $tutorial){
+        return view('reportTutorialPage', compact('tutorial'));
     }
 
     public function store(Request $request,$id)
@@ -39,7 +44,11 @@ class reportController extends Controller
         $validatedData['tutorial_id'] = $data->id;
         $report = Report::create($validatedData);
 
-        return redirect()->route('tutorial.index')->with('report', 'data telah berhasil dilaporkan');
+        if(Auth::user()->id == 1){
+            return redirect()->route('tutorial.index')->with('report', 'data telah berhasil dilaporkan');
+        }else{
+            return redirect()->route('artikelTutorial', ['tutorial' => $data])->with('report', 'data telah berhasil dilaporkan');
+        }
     }
 
     public function getDataReport()

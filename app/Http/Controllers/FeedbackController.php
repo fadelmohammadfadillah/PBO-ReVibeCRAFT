@@ -87,7 +87,7 @@ class FeedbackController extends Controller
         if($request->user_id == 1){
             return redirect()->route('feedback.tambah')->with('status', 'data telah berhasil disimpan di database');
         }else {
-            return redirect()->route('feedbackPage')->with('status', 'data feedback telah berhasil disimpan di database');
+            return redirect()->route('viewFormFeedback')->with('status', 'data feedback telah berhasil disimpan di database');
         }
     }
 
