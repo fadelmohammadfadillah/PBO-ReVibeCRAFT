@@ -30,9 +30,10 @@ Route::get('/', function () {
 Auth::routes();
 Route::post('addFeedback',[FeedbackController::class, 'store'] )->name('feedbackUser');
 Route::post('{id}/addReport', [reportController::class, 'store'])->name('userReport');
-Route::get('report/{tutorial}', [reportController::class, 'viewReportPage'])->name('reportTutorialPage');
+Route::get('report/{tutorial}', [reportController::class, 'viewReportPage'])->middleware('auth', 'role:user')->name('reportTutorialPage');
 Route::get('/view/{tutorial}', [TutorialController::class, 'viewArticleTutorial'])->name('artikelTutorial');
-Route::get('/formFeedback', [FeedbackController::class, 'viewFormFeedback'])->name('viewFormFeedback');
+Route::get('/formFeedback', [FeedbackController::class, 'viewFormFeedback'])->middleware('auth', 'role:user')->name('viewFormFeedback');
+
 Route::group(['prefix' => 'dashboard/admin', 'middleware'=>['auth', 'role:admin']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
