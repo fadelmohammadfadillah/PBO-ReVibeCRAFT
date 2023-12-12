@@ -93,7 +93,7 @@
                 <div class="mx-auto max-w-2xl py-10 sm:py-48 lg:py-10">
                     <div class="text-center">
                         <div class="flex justify-center item-center">
-                            <img src="{{asset('storage/assets/hero-ReVibeCRAFT.png')}}" alt="hero ReVibeCRAFT">
+                            <img src="{{asset('storage/assets/hero-ReVibeCRAFT.jpg')}}" alt="hero ReVibeCRAFT">
                         </div>
                         <p class="mt-6 text-lg leading-8 text-gray-600">Pelajari cara untuk membuat barang berguna dari sampah sehari-hari dengan mengikuti panduan kami.</p>
                         <div class="mt-10 flex items-center justify-center gap-x-6">
