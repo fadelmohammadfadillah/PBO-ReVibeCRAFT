@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->integer('rating_id');
-            $table->text('rating');
-            $table->text('deskripsi');
+            $table->unsignedBigInteger('user_id')->nullable(); // Mengizinkan nilai null
+            $table->unsignedBigInteger('rating_id');
+            $table->integer('rating');
+            $table->string('deskripsi');
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.

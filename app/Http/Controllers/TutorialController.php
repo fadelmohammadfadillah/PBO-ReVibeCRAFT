@@ -11,6 +11,7 @@ use Yajra\DataTables\DataTables;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class TutorialController extends Controller
 {
@@ -76,6 +77,7 @@ class TutorialController extends Controller
                 'foto'=> 'image|mimes:jpg,png,jpeg,gif,svg, webp|max:1024',
             ]);
         }catch(ValidationException $e){
+            Log::error('Gagal validasi data tutorial. Errors: ' . json_encode($e->errors()));
             $response = [];
             $response['message'] = 'Validasi gagal';
             $response['errors'] = $e->errors();
@@ -91,6 +93,7 @@ class TutorialController extends Controller
         }
         $validatedData['foto'] = $thumbnailName;
         $tutorial = Tutorial::create($validatedData);
+        Log::info('Data tutorial berhasil disimpan di database. Tutorial ID: ' . $tutorial->id);
         return redirect()->route('tutorial.tambah')->with('status', 'data telah berhasil disimpan di database');
     }
 
